@@ -14,6 +14,9 @@ export OPENAI_ENDPOINT=YOUR_AZURE_OPENAI_ENDPOINT_URL
 export OPENAI_API_KEY=YOUR_AZURE_OPENAI_API_KEY
 ```
 
+> [!NOTE]
+> If you use OpenAI instead of AzureOpenAI, do not set OPENAI_ENDPOINT as an environment variable.
+
 The code has been tested with Python 3.9.13 using CentOS Linux release 7.9.2009 (Core). Please install the required Python packages by:
 
 ```bash

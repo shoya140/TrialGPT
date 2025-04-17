@@ -9,13 +9,23 @@ from nltk.tokenize import sent_tokenize
 import time
 import os
 
-from openai import AzureOpenAI
+from openai import AzureOpenAI, OpenAI
 
-client = AzureOpenAI(
-	api_version="2023-09-01-preview",
-	azure_endpoint=os.getenv("OPENAI_ENDPOINT"),
-	api_key=os.getenv("OPENAI_API_KEY"),
-)
+
+if os.getenv("OPENAI_ENDPOINT"):
+    client = AzureOpenAI(
+        api_version="2023-09-01-preview",
+        azure_endpoint=os.getenv("OPENAI_ENDPOINT"),
+        api_key=os.getenv("OPENAI_API_KEY"),
+    )
+else:
+    import httpx
+    http_client = httpx.Client()
+    client = OpenAI(
+        api_key=os.getenv("OPENAI_API_KEY"),
+        http_client=http_client
+    )
+
 
 def parse_criteria(criteria):
 	output = ""
